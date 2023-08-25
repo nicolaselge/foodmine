@@ -1,0 +1,7 @@
+<div class="flex space-x-2 w-min mx-auto mt-12" *ngIf="tags">
+    <div *ngFor="let tag of tags" routerLink="/tag/{{tag.name}}"
+        class="border border-gray-300 h-6 mb-4 md:mb-0 w-min rounded-full flex items-center justify-center px-2 cursor-pointer">
+        <span class="text-xs text-gray-800 font-normal whitespace-nowrap">{{ tag.name }}</span>
+        <span class="text-xs text-gray-800 font-normal whitespace-nowrap ps-1">({{ tag.count}})</span>
+    </div>
+</div>
