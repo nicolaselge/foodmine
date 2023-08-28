@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
+import { UserService } from 'src/app/services/user.service';
+import { User } from '../../shared/user.model';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +14,7 @@ export class HeaderComponent {
   isSearch: boolean = false;
 
   cartQuantity: number = 0;
+  user!: User;
 
   mobileMenu: boolean = true;
   mobileMenuBtn() {
@@ -19,14 +22,26 @@ export class HeaderComponent {
   }
 
   dropdownHandler(element: Element) {
-    element.children[0].classList.toggle('hidden');
+    element.children[2].classList.toggle('hidden');
   }
 
-  constructor(carteService: CartService) {
+  constructor(carteService: CartService,private userService: UserService) {
     carteService.getCartObservable().subscribe((newCart) => {
       this.cartQuantity = newCart.totalCount;
+    })
+
+    userService.user$.subscribe((newUser) => {
+      this.user = newUser;
     })
   }
 
   ngOnInit(): void {}
+
+  logout() {
+    this.userService.logout();
+  }
+
+  get isAuth() {
+    return this.user.token;
+  }
 }

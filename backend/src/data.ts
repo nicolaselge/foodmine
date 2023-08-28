@@ -121,3 +121,24 @@ export const sample_tags: any[] = [
 	{ name: 'desserts', count: 1 },
 	{ name: 'salads', count: 1 },
 ]
+
+export const sample_users: any[] = [
+	{
+		id: 1,
+		name: "John Doe",
+		email: "elge.nicolas@gmail.com",
+		password: "azertyuiop",
+		address: "Toronto On",
+		token: '',
+		isAdmin: true,
+	},
+	{
+		id: 2,
+		name: "Jane Doe",
+		email: "jane@gmail.com",
+		password: "azertyuiop",
+		address: "Shanghai",
+		token: '',
+		isAdmin: false,
+	}
+]

@@ -1,5 +1,6 @@
 import { Food } from "./app/components/shared/food.model"
 import { Tag } from "./app/components/shared/tag.model"
+import { User } from "./app/components/shared/user.model"
 
 export const sample_foods: Food[] = [
 	{
@@ -123,4 +124,25 @@ export const sample_tags: Tag[] = [
 	{ name: 'sandwiches', count: 3 },
 	{ name: 'desserts', count: 1 },
 	{ name: 'salads', count: 1 },
+]
+
+export const sample_users: User[] = [
+	{
+		id: 1,
+		name: "John Doe",
+		email: "elge.nicolas@gmail.com",
+		password: "azertyuiop",
+		address: "Toronto On",
+		token: '',
+		isAdmin: true,
+	},
+	{
+		id: 2,
+		name: "Jane Doe",
+		email: "jane@gmail.com",
+		password: "azertyuiop",
+		address: "Shanghai",
+		token: '',
+		isAdmin: false,
+	}
 ]

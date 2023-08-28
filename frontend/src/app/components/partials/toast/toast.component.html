@@ -1,0 +1,18 @@
+<div class="flex items-center justify-end sticky bottom-4 space-x-4">
+    <div id="toast-alert"
+        class="scale-75 transition duration-500 cursor-pointer w-min {{toast.colorBg}} shadow rounded-md py-4 px-4">
+        <div class="sm:flex items-center">
+            <div class="flex items-end">
+                <div [ngSwitch]="toast.data.type"
+                    class="mr-2 text-base font-bold {{toast.colorText}} uppercase">
+                    <div *ngSwitchCase="0">error</div>
+                    <div *ngSwitchCase="1">info</div>
+                    <div *ngSwitchCase="2">success</div>
+                    <div *ngSwitchCase="3">warning</div>
+                    <div *ngSwitchDefault>output error</div>
+                </div>
+            </div>
+            <p class="text-base {{toast.colorText}} whitespace-nowrap">{{toast.data.message}}</p>
+        </div>
+    </div>
+</div>

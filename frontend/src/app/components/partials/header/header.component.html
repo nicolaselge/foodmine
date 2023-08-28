@@ -9,14 +9,27 @@
                 <div class="hidden md:block">
                     <ul class="flex items-center space-x-6">
                         <li>
-                            <div #thisElement class="flex items-center pl-8 relative cursor-pointer" (click)="dropdownHandler(thisElement)">
-                                <ul class="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 hidden">
+                            <div class="text-white text-base cursor-pointer" routerLink="/login" *ngIf="!isAuth">Login</div>
+                        </li>
+
+                        <!-- profile button -->
+                        <li *ngIf="isAuth">
+                            <div #thisElement class="flex items-center relative cursor-pointer"
+                                (click)="dropdownHandler(thisElement)">
+                                <img class="rounded h-10 w-10 object-cover"
+                                    src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
+                                    alt="logo" />
+                                <div class="text-white text-base ml-2">{{ user.name }}</div>
+                                <!-- dropdown login -->
+                                <ul
+                                    class="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 hidden">
                                     <li
                                         class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                         <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user"
-                                                width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-user" width="20" height="20"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" />
                                                 <circle cx="12" cy="7" r="4" />
                                                 <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
@@ -26,8 +39,9 @@
                                     </li>
                                     <li
                                         class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="20"
-                                            height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-help" width="20" height="20"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
                                             stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" />
                                             <circle cx="12" cy="12" r="9" />
@@ -36,11 +50,12 @@
                                         </svg>
                                         <span class="ml-2" routerLink="/orders">Orders</span>
                                     </li>
-                                    <li
+                                    <li (click)="logout()"
                                         class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings"
-                                            width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-settings" width="20" height="20"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" />
                                             <path
                                                 d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -49,24 +64,35 @@
                                         <span class="ml-2">Logout</span>
                                     </li>
                                 </ul>
-                                <img class="rounded h-10 w-10 object-cover"
-                                    src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
-                                    alt="logo" />
-                                <p class="text-white text-base ml-2">Jane Doe</p>
+                                <!-- end dropdown login -->
                             </div>
                         </li>
+                        <!-- end profile button -->
+
+                        <!-- cart button -->
                         <li>
-                            <a href="javascript:void(0)" class="text-gray-800 dark:text-white flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                            <div routerLink="/cart-page"
+                                class="text-gray-800 dark:text-white flex items-center space-x-2 cursor-pointer">
                                 <div>
-                                    <svg class="fill-stroke" width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4 1L1 5V19C1 19.5304 1.21071 20.0391 1.58579 20.4142C1.96086 20.7893 2.46957 21 3 21H17C17.5304 21 18.0391 20.7893 18.4142 20.4142C18.7893 20.0391 19 19.5304 19 19V5L16 1H4Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M1 5H19" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M14 9C14 10.0609 13.5786 11.0783 12.8284 11.8284C12.0783 12.5786 11.0609 13 10 13C8.93913 13 7.92172 12.5786 7.17157 11.8284C6.42143 11.0783 6 10.0609 6 9" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                                    <svg class="fill-stroke" width="20" height="22" viewBox="0 0 20 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M4 1L1 5V19C1 19.5304 1.21071 20.0391 1.58579 20.4142C1.96086 20.7893 2.46957 21 3 21H17C17.5304 21 18.0391 20.7893 18.4142 20.4142C18.7893 20.0391 19 19.5304 19 19V5L16 1H4Z"
+                                            stroke="currentColor" stroke-width="1.25" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M1 5H19" stroke="currentColor" stroke-width="1.25"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M14 9C14 10.0609 13.5786 11.0783 12.8284 11.8284C12.0783 12.5786 11.0609 13 10 13C8.93913 13 7.92172 12.5786 7.17157 11.8284C6.42143 11.0783 6 10.0609 6 9"
+                                            stroke="currentColor" stroke-width="1.25" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                     </svg>
                                 </div>
-                                <p class="text-base text-right" routerLink="/cart-page">Cart <span>({{ cartQuantity }})</span></p>
-                            </a>
+                                <div class="text-base text-right">({{ cartQuantity }})</div>
+                            </div>
                         </li>
+                        <!-- end cart button -->
+
                     </ul>
                 </div>
                 <!-- <div class="md:hidden flex justify-right">
