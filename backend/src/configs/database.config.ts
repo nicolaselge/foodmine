@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+import { Sequelize } from 'sequelize';
 
 export const dbConnect = async () => {
     const sequelize = new Sequelize('foodmine', 'root', '', {
@@ -13,5 +13,3 @@ export const dbConnect = async () => {
         console.error('Unable to connect to the database:', error);
     }
 }
-
-export default dbConnect;
